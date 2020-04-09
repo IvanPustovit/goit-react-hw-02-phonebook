@@ -1,0 +1,11 @@
+.delete {
+  /* display: inline; */
+  margin-left: 10px;
+  width: 50px;
+}
+
+/* li {
+  display: grid;
+  grid-template-columns: repeat(2, 250px 50px);
+  margin-bottom: 5px;
+} */
