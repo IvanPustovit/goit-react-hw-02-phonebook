@@ -24,7 +24,7 @@ class App extends Component {
     this.isContact() !== true
       ? name.length && number.length
         ? contacts.push({ name: name, number: number, id: shortid.generate() })
-        : alert("Enter name or number")
+        : alert("Enter name and number")
       : alert(`${name} is already in contacts`);
 
     this.setState(prev => ({ contacts: prev.contacts }));
