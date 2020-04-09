@@ -63,7 +63,6 @@ class App extends Component {
   deleteContact = e => {
     const { contacts } = this.state;
     const elId = e.target.attributes.id.value;
-
     const ContactListNew = contacts.filter(el => el.id !== elId);
     this.setState({
       contacts: ContactListNew,
@@ -73,11 +72,9 @@ class App extends Component {
 
   isContact = e => {
     const { name, contacts } = this.state;
-    const a = contacts.some(
+    return contacts.some(
       el => el.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
     );
-
-    return a;
   };
 
   contactsId = shortid.generate();
@@ -106,7 +103,6 @@ class App extends Component {
         <ContactList
           contacts={contacts}
           filterContacts={filterContacts}
-          // filterContacts={filterContacts}
           deleteContact={this.deleteContact}
         />
       </div>

@@ -9,7 +9,6 @@ const ContactForm = ({
   handleChangeNumber,
   addToContacts,
   contactsId,
-  isContact,
 }) => {
   return (
     <div className={classes.form}>

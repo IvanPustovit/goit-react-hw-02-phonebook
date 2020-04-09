@@ -46,13 +46,14 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     }),
   ),
-  // filterContacts: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.string.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //     number: PropTypes.string.isRequired,
-  //   }),
-  // ),
+  filterContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }),
+  ),
+  deleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;
