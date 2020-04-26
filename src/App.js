@@ -3,6 +3,8 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import Filter from "./components/Filter/Filter";
 import ContactList from "./components/ContactList/ContactList";
 import shortid from "shortid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   state = {
@@ -17,31 +19,38 @@ class App extends Component {
     name: "",
     number: "",
   };
+  notifyA = () => toast("Enter name and number");
+  notifyB = () => {
+    const { name } = this.state;
+    toast(`${name} is already in contacts`);
+  };
 
   addToContacts = e => {
     e.preventDefault();
-    const { contacts, name, number } = this.state;
+    const { name, number } = this.state;
+    const newContacts = { name: name, number: number, id: shortid.generate() };
+
     this.isContact() !== true
       ? name.length && number.length
-        ? contacts.push({ name: name, number: number, id: shortid.generate() })
-        : alert("Enter name and number")
-      : alert(`${name} is already in contacts`);
+        ? this.setState(prev => ({
+            contacts: [newContacts, ...prev.contacts],
+            filterContacts: [newContacts, ...prev.filterContacts],
+          }))
+        : this.notifyA()
+      : this.notifyB();
 
-    this.setState(prev => ({ contacts: prev.contacts }));
     this.setState({
       name: "",
       number: "",
     });
   };
 
-  handleChangeName = e => {
-    this.setState({ name: e.target.value });
-  };
-  handleChangeNumber = e => {
-    this.setState({ number: e.target.value });
-  };
-  handleChangeNameFilter = e => {
-    this.setState({ filter: e.target.value });
+  inputHandler = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [name]: value,
+    });
   };
 
   filterContacts = e => {
@@ -60,10 +69,10 @@ class App extends Component {
     });
   };
 
-  deleteContact = e => {
+  deleteContact = id => {
     const { contacts } = this.state;
-    const elId = e.target.attributes.id.value;
-    const ContactListNew = contacts.filter(el => el.id !== elId);
+    const ContactListNew = contacts.filter(el => el.id !== id);
+
     this.setState({
       contacts: ContactListNew,
       filterContacts: ContactListNew,
@@ -80,14 +89,15 @@ class App extends Component {
   contactsId = shortid.generate();
   render() {
     const { name, number, contacts, filter, filterContacts } = this.state;
+
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm
-          handleChangeName={this.handleChangeName}
+          handleChangeName={this.inputHandler}
           nameValue={name}
           numberValue={number}
-          handleChangeNumber={this.handleChangeNumber}
+          handleChangeNumber={this.inputHandler}
           addToContacts={this.addToContacts}
           contactsId={this.contactsId}
           isContact={this.isContact}
@@ -95,7 +105,7 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter
-          handleChangeNameFilter={this.handleChangeNameFilter}
+          handleChangeNameFilter={this.inputHandler}
           filterContacts={this.filterContacts}
           contacts={contacts}
           filter={filter}

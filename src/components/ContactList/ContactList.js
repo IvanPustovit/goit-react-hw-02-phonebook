@@ -14,7 +14,9 @@ const ContactList = ({ contacts, filterContacts, deleteContact }) => {
                   type="button"
                   id={el.id}
                   className={classes.delete}
-                  onClick={deleteContact}
+                  onClick={() => {
+                    deleteContact(el.id);
+                  }}
                 >
                   Delete
                 </button>
@@ -27,7 +29,9 @@ const ContactList = ({ contacts, filterContacts, deleteContact }) => {
                   type="button"
                   id={el.id}
                   className={classes.delete}
-                  onClick={deleteContact}
+                  onClick={() => {
+                    deleteContact(el.id);
+                  }}
                 >
                   Delete
                 </button>

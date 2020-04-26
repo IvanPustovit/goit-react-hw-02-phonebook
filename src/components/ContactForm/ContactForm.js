@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./ContactForm.module.css";
 import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = ({
   handleChangeName,
@@ -38,6 +40,7 @@ const ContactForm = ({
           <button type="text" onClick={addToContacts}>
             Add contact
           </button>
+          <ToastContainer />
         </div>
       </form>
     </div>

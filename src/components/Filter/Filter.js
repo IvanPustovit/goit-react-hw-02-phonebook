@@ -6,6 +6,8 @@ const Filter = ({ handleChangeNameFilter, filterContacts }) => {
     <div>
       <p>Find contacts by name</p>
       <input
+        name="filter"
+        type="text"
         onChange={handleChangeNameFilter}
         onInputCapture={filterContacts}
       />
